@@ -1,0 +1,4 @@
+https://discourse.processing.org/t/webcam-bar-code-qr-code-read/2911/4
+https://forum.processing.org/one/topic/qrcode-barcode-reading-and-writing-with-processing.html
+https://www.openprocessing.org/sketch/12942#
+https://dxarts.washington.edu/wiki/reading-qr-codes-processing
