@@ -1,2 +1,2 @@
-# python-learnings
-Code from Python learning
+# all projects
+All projects
