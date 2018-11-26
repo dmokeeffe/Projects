@@ -8,12 +8,25 @@ color [] temperatureChart = { 0xFF8F00FF, 0xFF4B0082, 0xFF0000FF,
                               0xFF00FF00, 0xFFFFFF00, 0xFFFF7F00, 0xFFFF0000 };
 float markerWidth, markerHeight;
 float gapX, gapY;
+
+String backgroundImage = "dawn-at-sea.jpg";
+PImage wallpaper;
+
+ButtonStrip buttonInterface;
+final String [] buttonLabels = { "1968", "1978", "1988", "1998", "2008", "2018" };
+
 void setup() {
-  size(1280, 720);
+ size(1600, 850);
   
   temperatures = getTemperatureDataFrom(dataSource);
   //print(temperatures);
   setGridParameters();
+  
+  wallpaper = loadImage(backgroundImage);
+  
+  buttonInterface = new ButtonStrip(buttonLabels);
+  buttonInterface.setButtonColour(5);
+  buttonInterface.setPosition((width - buttonInterface.getWidth()) / 2, height - buttonInterface.getHeight() - 10);
 }
 void setGridParameters() {  
   gapX = 10;
@@ -26,7 +39,15 @@ void setGridParameters() {
   markerHeight = (availableHeight - gapY * (NUMBER_DOWN -1 )) / NUMBER_DOWN;
 }
 void draw() {
+  
+  
+    background(wallpaper);
+  
+  
+  
   displayTemperatureChart();
+  
+  buttonInterface.draw();
 }
 void displayTemperatureChart() {
   float x = gapX, y = gapY;
