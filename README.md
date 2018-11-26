@@ -1,2 +1,2 @@
-# all projects
+# All projects
 All projects
