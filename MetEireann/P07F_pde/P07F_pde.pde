@@ -1,32 +1,38 @@
-final String dataSource = "CorkAirportMaxAirTemp-2017.csv";
+//check this out for working with tables
+//https://processing.org/reference/loadTable_.html
+//https://processing.org/reference/Table.html
+
+//final String dataSource = "CorkAirportMaxAirTemp-2017.csv";
+final String dataSource = "dly3904.csv";
 final int DAYS_IN_YEAR = daysInYear(2017);
 final int NUMBER_ACROSS = 30;
 final int NUMBER_DOWN = DAYS_IN_YEAR / NUMBER_ACROSS + 1;
+Button button1;  // the button
+int clk = 1;       // number of times the button is clicked
 
 float [] temperatures;
 color [] temperatureChart = { 0xFF8F00FF, 0xFF4B0082, 0xFF0000FF,
                               0xFF00FF00, 0xFFFFFF00, 0xFFFF7F00, 0xFFFF0000 };
+                             
 float markerWidth, markerHeight;
 float gapX, gapY;
 
 String backgroundImage = "dawn-at-sea.jpg";
 PImage wallpaper;
 
-ButtonStrip buttonInterface;
-final String [] buttonLabels = { "1968", "1978", "1988", "1998", "2008", "2018" };
+
+//final String [] buttonLabels = { "1968", "1978", "1988", "1998", "2008", "2018" };
 
 void setup() {
  size(1600, 850);
   
   temperatures = getTemperatureDataFrom(dataSource);
-  //print(temperatures);
+  print(temperatures);
   setGridParameters();
   
   wallpaper = loadImage(backgroundImage);
-  
-  buttonInterface = new ButtonStrip(buttonLabels);
-  buttonInterface.setButtonColour(5);
-  buttonInterface.setPosition((width - buttonInterface.getWidth()) / 2, height - buttonInterface.getHeight() - 10);
+// create the button object
+  button1 = new Button("1968", 600, 700, 100, 50);
 }
 void setGridParameters() {  
   gapX = 10;
@@ -39,15 +45,15 @@ void setGridParameters() {
   markerHeight = (availableHeight - gapY * (NUMBER_DOWN -1 )) / NUMBER_DOWN;
 }
 void draw() {
+ 
+// draw a square if the mouse curser is over the button
+  if (button1.MouseIsOver()) {
+   // rect(200, 20, 50, 50);
+  }
+  // draw the button in the window
+  button1.Draw();
+ // background(wallpaper);
   
-  
-    background(wallpaper);
-  
-  
-  
-  displayTemperatureChart();
-  
-  buttonInterface.draw();
 }
 void displayTemperatureChart() {
   float x = gapX, y = gapY;
@@ -60,12 +66,28 @@ void displayTemperatureChart() {
      y += markerHeight + gapY;
      
    }
-   fill(temperatureChart[temperatureCategory(temperatures[i])]);
+   fill(temperatureChart[temperatureCategory(temperatures[i])]); //instead of temperatures[i] you could you your data from your table
    rect(x, y, markerWidth, markerHeight);
    
   x += markerWidth + gapX;
     
   }
+}
+
+void mousePressed() {
+if (button1.MouseIsOver()) {
+  displayTemperatureChart();
+    // print some text to the console pane if the button is clicked
+    print("Clicked: ");
+    println(clk++);
+    updateDatasource();
+  }
+}
+
+//could be used to update the datasource
+void updateDatasource() {
+
+
 }
 
 int temperatureCategory(float t) {
